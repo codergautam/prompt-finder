@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@vercel/analytics': ^1.0.1
   ai: ^2.1.25
   eslint: 8.45.0
   eslint-config-next: 13.4.12
@@ -10,6 +11,7 @@ specifiers:
   react-dom: 18.2.0
 
 dependencies:
+  '@vercel/analytics': 1.0.1
   ai: 2.1.25_react@18.2.0
   next: 13.4.12_react-dom@18.2.0+react@18.2.0
   openai-edge: 1.2.1
@@ -279,6 +281,10 @@ packages:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.1
     dev: true
+
+  /@vercel/analytics/1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.10.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
