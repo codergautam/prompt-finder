@@ -19,6 +19,7 @@
 .DS_Store
 pnpm-lock.yaml
 *.pem
+.env
 
 # debug
 npm-debug.log*
