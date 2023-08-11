@@ -19,7 +19,7 @@ export default function Home() {
       },
       body: JSON.stringify({ email }),
     });
-    setMessage('Thank you! We will notify you when we launch.');
+    setMessage('Thanks! We will notify you when we launch.');
   };
 
   return (
