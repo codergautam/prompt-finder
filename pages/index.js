@@ -11,7 +11,6 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // POST to /api/handleNotify
     fetch('/api/handleNotify', {
       method: 'POST',
       headers: {
