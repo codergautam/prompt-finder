@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js'
 import config from '../config';
+import Navbar from '../components/Navbar';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [supabase, setSupabase] = useState(null);
+  const [signupSuccess, setSignupSuccess] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +23,7 @@ export default function Signup() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSignupSuccess(false); // <-- Reset on a new attempt
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -29,7 +33,9 @@ export default function Signup() {
     if (error) {
       setError(error.message);
     } else if (data) {
-      router.push('/'); // Redirect to the home page
+      // Comment out the router push to stay on the signup page
+      // router.push('/');
+      setSignupSuccess(true); // <-- Set to true if signup is successful
     }
 
     setLoading(false);
@@ -43,11 +49,14 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400">
-      <Head>
-        <title>Prompt Finder - Signup</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+<div className="min-h-screen bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400">
+    <Head>
+      <title>Prompt Finder - Signup</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <Navbar />
+
+    <div className="flex justify-center items-center h-screen"> {/* <-- Added Flex Container */}
       <div className="w-3/4 lg:w-1/2 xl:w-1/3 p-8 rounded-lg shadow-lg bg-white text-center transition-all duration-300 ease-in-out transform hover:scale-105">
         <h1 className="text-4xl font-bold text-blue-800 mb-4">Signup</h1>
         <p className="text-gray-600 font-bold mb-4">Welcome to Prompt Finder!</p>
@@ -88,6 +97,9 @@ export default function Signup() {
               required
             />
           </div>
+          {signupSuccess ? (  // <-- Conditional rendering of the message
+        <p className="text-green-600 mb-4">Please check your email for a verification link.</p>
+      ) : null }
           {error && <p className="text-red-600 mb-4">{error}</p>}
           <button
             type="submit"
@@ -98,6 +110,7 @@ export default function Signup() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }
