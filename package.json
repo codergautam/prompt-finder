@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@vercel/analytics": "^1.0.1",
     "ai": "^2.1.25",
+    "aos": "^2.3.4",
     "dotenv": "^16.3.1",
     "mongoose": "^7.4.2",
     "next": "13.4.12",
@@ -19,6 +21,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/react": "18.2.21",
     "autoprefixer": "^10.4.14",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
