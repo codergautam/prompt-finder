@@ -176,15 +176,14 @@ export default function Features() {
             Prompt:
           </span>
           <p className="text-sm text-gray-500 font-semibold">
-            {currentPrompt}
+            {currentPrompt.slice(0, 200) + "..."}
           </p>
             <div className='h-[50vh] mt-4 overflow-y-auto my-4 px-4'>
           <div className="flex flex-col w-full gap-4">
             {
               messages.filter(e=>e.role!=="system").map((chat, i) => (
                 <div key={`chat${i}`} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-gray-500 text-white ml-auto text-end rounded-bl" : "bg-gray-300 text-start mr-auto rounded-br text-black"} px-4 py-2 rounded-t`}>
-                <p className="line-clamp-5
-                ">
+                <p>
                 {chat.content}
                 </p>
                 </div>
