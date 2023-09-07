@@ -27,7 +27,7 @@ export default function Features() {
   const [currentPrompt, setCurrentPrompt] = useState(prompts[0].title)
   const [currentQuestion, setCurrentQuestion] = useState(prompts[0].question)
 
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
+  const { messages, setMessages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages: [
       {role: 'system', content: currentPrompt, id: "initPrompt"},
       {role: 'assistant', content: currentQuestion, id: "initMessage"}
@@ -38,7 +38,7 @@ export default function Features() {
     <section className="relative">
 
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
+      <div className="absolute inset-0 h-screen bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
       <div className="relative max-w-6xl flex mx-auto gap-2">
@@ -58,9 +58,9 @@ export default function Features() {
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
                 <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-2100 border-transparent'}`}
+                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(1); setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question) }}
+                  onClick={(e) => { e.preventDefault(); setTab(1); setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question); }}
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Your own personal writing assistant</div>
@@ -75,7 +75,7 @@ export default function Features() {
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(2); setCurrentPrompt(prompts[1].title); setCurrentQuestion(prompts[1].question) }}
+                  onClick={(e) => { e.preventDefault(); setTab(2); setCurrentPrompt(prompts[1].title); setCurrentQuestion(prompts[1].question); }}
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Your own practical mechanical engineer</div>
@@ -90,7 +90,7 @@ export default function Features() {
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(3); setCurrentPrompt(prompts[2].title); setCurrentQuestion(prompts[2].question) }}
+                  onClick={(e) => { e.preventDefault(); setTab(3); setCurrentPrompt(prompts[2].title); setCurrentQuestion(prompts[2].question); }}
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">A professional biologist and anatomist</div>
@@ -171,18 +171,18 @@ export default function Features() {
           </div>
         </div>
           <div className='py-8 w-3/5 h-screen flex items-center'>
-        <div className="h-4/5 w-full flex flex-col mx-auto px-10 py-8 rounded bg-stone-950 text-center">
-          <span className="text-stone-800 font-bold text-xl">
+        <div className="h-4/5 w-full flex flex-col mx-auto px-10 py-8 rounded bg-gray-200 text-center">
+          <span className="text-gray-400 font-bold text-xl">
             Prompt:
           </span>
-          <span className="text-sm w-5/6 text-stone-400 font-semibold mx-auto">
+          <p className="text-sm text-gray-500 font-semibold">
             {currentPrompt}
-          </span>
-            <div className='h-[50vh] overflow-y-auto my-4 px-4'>
+          </p>
+            <div className='h-[50vh] mt-4 overflow-y-auto my-4 px-4'>
           <div className="flex flex-col w-full gap-4">
             {
               messages.filter(e=>e.role!=="system").map((chat, i) => (
-                <div key={`chat${i}`} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-stone-600 ml-auto text-end rounded-bl" : "bg-stone-900 text-start mr-auto rounded-br"} text-white px-4 py-2 rounded-t`}>
+                <div key={`chat${i}`} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-gray-500 text-white ml-auto text-end rounded-bl" : "bg-gray-300 text-start mr-auto rounded-br text-black"} px-4 py-2 rounded-t`}>
                 <p className="line-clamp-5
                 ">
                 {chat.content}
@@ -193,8 +193,8 @@ export default function Features() {
           </div>
           </div>
           <form className='mt-auto' onSubmit={handleSubmit}>
-            <input value={input} onChange={handleInputChange} type="text" placeholder='What will you ask?' className="border-b-2 placeholder-stone-600 border-stone-400 bg-transparent outline-none w-full text-white py-2" />
-            <button type="submit" className="bg-stone-600 text-white py-2 px-4 rounded mt-4">Send</button>
+            <input value={input} onChange={handleInputChange} type="text" placeholder='What will you ask?' className="border-b-2 placeholder-gray-600 border-gray-300 bg-transparent outline-none w-full text-black py-2" />
+            <button type="submit" className="bg-gray-300 text-black py-2 px-4 rounded mt-4">Send</button>
           </form>
         </div>
       </div>
