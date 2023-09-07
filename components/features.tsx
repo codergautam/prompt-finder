@@ -5,6 +5,8 @@ import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import FeaturesBg from '@/public/images/features-bg.png'
 import FeaturesElement from '@/public/images/features-element.png'
+import { prompts } from '@/utils/prompts'
+import { useChat } from 'ai/react'
 
 export default function Features() {
   
@@ -20,6 +22,18 @@ export default function Features() {
     heightFix()
   }, []) 
 
+  
+
+  const [currentPrompt, setCurrentPrompt] = useState(prompts[0].title)
+  const [currentQuestion, setCurrentQuestion] = useState(prompts[0].question)
+
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    initialMessages: [
+      {role: 'system', content: currentPrompt, id: "initPrompt"},
+      {role: 'assistant', content: currentQuestion, id: "initMessage"}
+    ],
+  });
+
   return (
     <section className="relative">
 
@@ -27,34 +41,30 @@ export default function Features() {
       <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-12 md:pt-20">
+      <div className="relative max-w-6xl flex mx-auto gap-2">
+        <div className="pt-12 w-2/5 md:pt-20">
 
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+          <div className="max-w-3xl mx-auto text-start pb-10 md:pb-6">
             <h1 className="h2 mb-4">Explore the solutions</h1>
             <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
           </div>
 
           {/* Section content */}
-          <div className="md:grid md:grid-cols-12 md:gap-6">
+          <div className="flex flex-col pr-2">
 
             {/* Content */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
-              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3">Powerful suite of tools</h3>
-                <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
-              </div>
+            <div className="max-w-xl md:max-w-none md:w-full mx-auto" data-aos="fade-right">
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
                 <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-2100 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(1); }}
+                  onClick={(e) => { e.preventDefault(); setTab(1); setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question) }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Your own personal writing assistant</div>
+                    <div className="text-gray-600">Take your writing skills to the next level with ai powered suggestions and help, built for aspiring writers, journalists, and more.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -65,11 +75,11 @@ export default function Features() {
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(2); }}
+                  onClick={(e) => { e.preventDefault(); setTab(2); setCurrentPrompt(prompts[1].title); setCurrentQuestion(prompts[1].question) }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Your own practical mechanical engineer</div>
+                    <div className="text-gray-600">Work with mechanical engineers who are knowledgable of how to create a myriad of architectural and robotic feats.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +90,11 @@ export default function Features() {
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(3); }}
+                  onClick={(e) => { e.preventDefault(); setTab(3); setCurrentPrompt(prompts[2].title); setCurrentQuestion(prompts[2].question) }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">A professional biologist and anatomist</div>
+                    <div className="text-gray-600">Work with an AI well versed in the fields of biology, genetics, chemistry, and anatomy.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -96,10 +106,9 @@ export default function Features() {
             </div>
 
             {/* Tabs items */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
+            {/* <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
               <div className="transition-all">
                 <div className="relative flex flex-col text-center lg:text-right" data-aos="zoom-y-out" ref={tabs}>
-                  {/* Item 1 */}
                   <Transition
                     show={tab === 1}
                     appear={true}
@@ -118,7 +127,6 @@ export default function Features() {
                       <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
                     </div>
                   </Transition>
-                  {/* Item 2 */}
                   <Transition
                     show={tab === 2}
                     appear={true}
@@ -137,7 +145,6 @@ export default function Features() {
                       <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
                     </div>
                   </Transition>
-                  {/* Item 3 */}
                   <Transition
                     show={tab === 3}
                     appear={true}
@@ -158,11 +165,39 @@ export default function Features() {
                   </Transition>
                 </div>
               </div>
-            </div>
+            </div> */}
+          
 
           </div>
-
         </div>
+          <div className='py-8 w-3/5 h-screen flex items-center'>
+        <div className="h-4/5 w-full flex flex-col mx-auto px-10 py-8 rounded bg-stone-950 text-center">
+          <span className="text-stone-800 font-bold text-xl">
+            Prompt:
+          </span>
+          <span className="text-sm w-5/6 text-stone-400 font-semibold mx-auto">
+            {currentPrompt}
+          </span>
+            <div className='h-[50vh] overflow-y-auto my-4 px-4'>
+          <div className="flex flex-col w-full gap-4">
+            {
+              messages.filter(e=>e.role!=="system").map((chat, i) => (
+                <div key={`chat${i}`} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-stone-600 ml-auto text-end rounded-bl" : "bg-stone-900 text-start mr-auto rounded-br"} text-white px-4 py-2 rounded-t`}>
+                <p className="line-clamp-5
+                ">
+                {chat.content}
+                </p>
+                </div>
+              ))
+            }
+          </div>
+          </div>
+          <form className='mt-auto' onSubmit={handleSubmit}>
+            <input value={input} onChange={handleInputChange} type="text" placeholder='What will you ask?' className="border-b-2 placeholder-stone-600 border-stone-400 bg-transparent outline-none w-full text-white py-2" />
+            <button type="submit" className="bg-stone-600 text-white py-2 px-4 rounded mt-4">Send</button>
+          </form>
+        </div>
+      </div>
       </div>
     </section>
   )
