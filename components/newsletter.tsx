@@ -1,4 +1,18 @@
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+
 export default function Newsletter() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [sampleInputs, setSampleInputs] = useState([{ input: '', output: '' }]);
+
+  const addSampleInput = () => {
+    setSampleInputs([...sampleInputs, { input: '', output: '' }]);
+  };
+
+  const removeSampleInput = (index: number) => {
+    setSampleInputs(sampleInputs.filter((_, i) => i !== index));
+  };
+
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -40,19 +54,59 @@ export default function Newsletter() {
                 <h3 className="h3 text-white mb-2">Want a custom prompt?</h3>
                 <p className="text-gray-300 text-lg mb-6">You can now order a custom prompt for your custom use. </p>
 
-                {/* CTA form */}
-                <form className="w-full lg:w-auto" action="/api/buy" method="POST">
-                  <div className="flex flex-col sm:flex-row max-w-xs mx-auto sm:max-w-md lg:mx-0">
-                    {/* <input type="email" className="form-input w-full appearance-none bg-gray-800 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" placeholder="Your email…" aria-label="Your email…" /> */}
-                    <button className="btn text-white bg-blue-600 hover:bg-blue-700 shadow">Order for $10</button>
-                  </div>
-                  {/* Success message */}
-                  {/* <p className="text-sm text-gray-400 mt-3">Thanks for subscribing!</p> */}
-                  <p className="text-sm text-gray-400 mt-3">Prompts are built to order and delivered within 7 days.</p>
-                </form>
+                <button type="button" className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" onClick={() => setModalIsOpen(true)}>Order for $10</button>
+              <p className="text-sm text-gray-100 mt-3">Prompts are built to order and delivered within 7 days.</p>
+
+                <Modal
+  isOpen={modalIsOpen}
+  onRequestClose={() => setModalIsOpen(false)}
+  contentLabel="Order Form"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)'
+    },
+    content: {
+      color: 'lightsteelblue',
+      background: '#f1f1f1',
+      borderRadius: '4px',
+      border: '1px solid #ccc',
+      padding: '20px',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      maxHeight: '90%', // Set max-height
+      overflow: 'auto', // Add overflow
+      WebkitOverflowScrolling: 'touch'
+    }
+  }}
+>
+                  <form className="w-full" action="/api/buy" method="POST">
+                    <div className="flex flex-col items-center max-w-xs mx-auto">
+                      <h1 className="text-2xl font-semibold text-gray-800">Basic Information</h1>
+                      <p className="text-gray-600">We can discuss more specific details after you submit this form.</p>
+                      <input type="email" className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder="Your email…" aria-label="Your email…" required name='email' maxLength={500} />
+                      <textarea className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder="Prompt description…" aria-label="Prompt description…" required name='description' maxLength={500} />
+                      <div id="sampleInputs">
+                        {sampleInputs.map((_, i) => (
+                          <div key={i} className="sampleInput">
+                            <input type="text" className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder={"Sample input "+(i+1)} aria-label="Sample input…" name={'sampleInput'+(i+1)} required maxLength={500} />
+                            <input type="text" className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder={"Sample output "+(i+1)} aria-label="Sample output…" name={'sampleOutput'+(i+1)} required maxLength={500} />
+                            <button type="button" className="btn text-white bg-blue-600 hover:bg-blue-700 shadow mx-auto" onClick={() => removeSampleInput(i)}>Remove</button>
+                          </div>
+                        ))}
+                        <button type="button" className="btn text-white bg-blue-600 hover:bg-blue-700 shadow mx-auto" onClick={addSampleInput}>Add Sample Input</button>
+                      </div>
+                      <button type="submit" className="btn text-white bg-blue-600 hover:bg-blue-700 shadow mx-auto">Submit</button>
+                    </div>
+                  </form>
+                </Modal>
               </div>
 
-            </div>
+              </div>
+
 
           </div>
 
