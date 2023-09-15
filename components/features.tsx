@@ -9,7 +9,7 @@ import { prompts } from '@/utils/prompts'
 import { useChat } from 'ai/react'
 
 export default function Features() {
-  
+
   const [tab, setTab] = useState<number>(1)
 
   const tabs = useRef<HTMLDivElement>(null)
@@ -20,9 +20,9 @@ export default function Features() {
 
   useEffect(() => {
     heightFix()
-  }, []) 
+  }, [])
 
-  
+
 
   const [currentPrompt, setCurrentPrompt] = useState(prompts[0].title)
   const [currentQuestion, setCurrentQuestion] = useState(prompts[0].question)
@@ -46,8 +46,7 @@ export default function Features() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-start pb-10 md:pb-6">
-            <h1 className="h-2 mb-4">Explore the solutions</h1>
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h1 className="h-2 mb-4">Sample Prompts</h1>
           </div>
 
           {/* Section content */}
@@ -120,7 +119,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -138,7 +137,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -156,7 +155,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -166,7 +165,7 @@ export default function Features() {
                 </div>
               </div>
             </div> */}
-          
+
 
           </div>
         </div>

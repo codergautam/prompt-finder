@@ -32,7 +32,7 @@ export default function Footer() {
           {/* Copyrights note */}
           <div className="text-sm text-gray-600 mr-4"><b>PromptFinder</b>
           <br/>
-          <p>{'Built with <3 by Gautam'}</p>
+          <p>{'Built with <3 by King-Diorr and Gautam'}</p>
           </div>
         </div>
 
