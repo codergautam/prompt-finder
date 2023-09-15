@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     console.log(req.body)
     let metadata = {
-      email: req.body.email,
       promptDescription: req.body.description,
       sampleInput1: req.body.sampleInput1,
       sampleInput2: req.body.sampleInput2,
@@ -17,7 +16,6 @@ export default async function handler(req, res) {
       sampleOutput4: req.body.sampleOutput4,
       sampleOutput5: req.body.sampleOutput5,
     };
-    console.log(metadata)
     try {
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
@@ -35,6 +33,7 @@ export default async function handler(req, res) {
         payment_intent_data: {
         metadata,
         },
+        metadata,
         automatic_tax: {enabled: true},
       });
       res.redirect(303, session.url);

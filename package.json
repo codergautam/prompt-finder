@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
     "react-scrollable-feed": "^1.3.2",
+    "resend": "^1.0.0",
     "stripe": "^13.4.0"
   },
   "devDependencies": {

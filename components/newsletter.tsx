@@ -87,7 +87,6 @@ export default function Newsletter() {
                     <div className="flex flex-col items-center max-w-xs mx-auto">
                       <h1 className="text-2xl font-semibold text-gray-800">Basic Information</h1>
                       <p className="text-gray-600">We can discuss more specific details after you submit this form.</p>
-                      <input type="email" className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder="Your email…" aria-label="Your email…" required name='email' maxLength={500} />
                       <textarea className="form-input w-full appearance-none bg-white border border-gray-700 focus:border-blue-600 rounded-lg px-4 py-3 mb-2 text-black placeholder-gray-500" placeholder="Prompt description…" aria-label="Prompt description…" required name='description' maxLength={500} />
                       <div id="sampleInputs">
                         {sampleInputs.map((_, i) => (
