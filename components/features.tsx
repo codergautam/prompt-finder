@@ -8,8 +8,10 @@ import FeaturesElement from '@/public/images/features-element.png'
 import { prompts } from '@/utils/prompts'
 import { useChat } from 'ai/react'
 
+import ScrollableFeed from 'react-scrollable-feed'
+
 export default function Features() {
-  
+
   const [tab, setTab] = useState<number>(1)
 
   const tabs = useRef<HTMLDivElement>(null)
@@ -20,9 +22,9 @@ export default function Features() {
 
   useEffect(() => {
     heightFix()
-  }, []) 
+  }, [])
 
-  
+
 
   const [currentPrompt, setCurrentPrompt] = useState(prompts[0].title)
   const [currentQuestion, setCurrentQuestion] = useState(prompts[0].question)
@@ -33,6 +35,13 @@ export default function Features() {
       {role: 'assistant', content: currentQuestion, id: "initMessage"}
     ],
   });
+
+  useEffect(() => {
+    setMessages([
+      {role: 'system', content: currentPrompt, id: "initPrompt"},
+      {role: 'assistant', content: currentQuestion, id: "initMessage"}
+    ]);
+  }, [tab, currentPrompt, currentQuestion, setMessages])
 
   return (
     <section className="relative">
@@ -46,8 +55,8 @@ export default function Features() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-start pb-10 md:pb-6">
-            <h1 className="h2 mb-4">Explore the solutions</h1>
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h1 className="h2 mb-4">Examples</h1>
+            <p className="text-xl text-gray-600">Prompts make chatting with chatbots a whole lot easier. Check these sample prompts out:</p>
           </div>
 
           {/* Section content */}
@@ -60,7 +69,7 @@ export default function Features() {
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(1); setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question); }}
+                  onClick={(e) => { e.preventDefault(); setTab(1);  setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question); }}
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Your own personal writing assistant</div>
@@ -78,8 +87,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(2); setCurrentPrompt(prompts[1].title); setCurrentQuestion(prompts[1].question); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Your own practical mechanical engineer</div>
-                    <div className="text-gray-600">Work with mechanical engineers who are knowledgable of how to create a myriad of architectural and robotic feats.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Your personal Spanish tutor</div>
+                    <div className="text-gray-600">Your own personal spanish tutor that learns your skill level, and builds vocabulary and sentence patterns.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +129,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -138,7 +147,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -156,7 +165,7 @@ export default function Features() {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 -translate-y-16"
                     beforeEnter={() => heightFix()}
-                    unmount={false}                     
+                    unmount={false}
                   >
                     <div className="relative inline-flex flex-col">
                       <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
@@ -166,7 +175,7 @@ export default function Features() {
                 </div>
               </div>
             </div> */}
-          
+
 
           </div>
         </div>
@@ -180,15 +189,15 @@ export default function Features() {
           </p>
             <div className='h-[50vh] mt-4 overflow-y-auto my-4 px-4'>
           <div className="flex flex-col w-full gap-4">
+            {/* <ScrollableFeed forceScroll={true}> */}
             {
               messages.filter(e=>e.role!=="system").map((chat, i) => (
-                <div key={`chat${i}`} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-gray-500 text-white ml-auto text-end rounded-bl" : "bg-gray-300 text-start mr-auto rounded-br text-black"} px-4 py-2 rounded-t`}>
-                <p>
+                <div key={i} className={`max-w-[50vh] flex group flex-col ${chat.role == "user" ? "bg-gray-500 text-white ml-auto text-end rounded-bl" : "bg-gray-300 text-start mr-auto rounded-br text-black"} px-4 py-2 rounded-t`}>
                 {chat.content}
-                </p>
                 </div>
               ))
             }
+            {/* </ScrollableFeed> */}
           </div>
           </div>
           <form className='mt-auto' onSubmit={handleSubmit}>
