@@ -50,8 +50,8 @@ export default function Features() {
       <div className="absolute inset-0 h-screen bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
-      <div className="relative max-w-6xl flex mx-auto gap-2">
-        <div className="pt-12 w-2/5 md:pt-20">
+      <div className="relative max-w-6xl flex flex-col px-6 lg:flex-row mx-auto gap-2">
+        <div className="pt-12 w-full lg:w-2/5 lg:pt-20">
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-start pb-10 md:pb-6">
@@ -60,7 +60,7 @@ export default function Features() {
           </div>
 
           {/* Section content */}
-          <div className="flex flex-col pr-2">
+          <div className="flex lg:flex-col pr-2">
 
             {/* Content */}
             <div className="max-w-xl md:max-w-none md:w-full mx-auto" data-aos="fade-right">
@@ -72,8 +72,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(1);  setCurrentPrompt(prompts[0].title); setCurrentQuestion(prompts[0].question); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Your own personal writing assistant</div>
-                    <div className="text-gray-600">Take your writing skills to the next level with ai powered suggestions and help, built for aspiring writers, journalists, and more.</div>
+                    <div className="font-bold text-base lg:text-xl leading-snug tracking-tight mb-1">Your own personal writing assistant</div>
+                    <div className="text-gray-600 hidden lg:flex">Take your writing skills to the next level with ai powered suggestions and help, built for aspiring writers, journalists, and more.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -87,8 +87,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(2); setCurrentPrompt(prompts[1].title); setCurrentQuestion(prompts[1].question); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Your personal Spanish tutor</div>
-                    <div className="text-gray-600">Your own personal spanish tutor that learns your skill level, and builds vocabulary and sentence patterns.</div>
+                    <div className="font-bold text-base lg:text-xl leading-snug tracking-tight mb-1">Your personal Spanish tutor</div>
+                    <div className="text-gray-600 hidden lg:flex">Your own personal spanish tutor that learns your skill level, and builds vocabulary and sentence patterns.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -102,8 +102,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(3); setCurrentPrompt(prompts[2].title); setCurrentQuestion(prompts[2].question); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">A professional biologist and anatomist</div>
-                    <div className="text-gray-600">Work with an AI well versed in the fields of biology, genetics, chemistry, and anatomy.</div>
+                    <div className="font-bold text-base lg:text-xl leading-snug tracking-tight mb-1">A professional biologist and anatomist</div>
+                    <div className="text-gray-600 hidden lg:flex">Work with an AI well versed in the fields of biology, genetics, chemistry, and anatomy.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +179,7 @@ export default function Features() {
 
           </div>
         </div>
-          <div className='py-8 w-3/5 h-screen flex items-center'>
+          <div className='lg:py-8 w-full lg:w-3/5 lg:h-screen flex items-center'>
         <div className="h-4/5 w-full flex flex-col mx-auto px-10 py-8 rounded bg-gray-200 text-center">
           <span className="text-gray-400 font-bold text-xl">
             Prompt:
