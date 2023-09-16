@@ -18,23 +18,37 @@ function generateAlphanumericString() {
 }
 
 function generateEmail(metadata) {
-  let emailContent = `<h1>Order Confirmation</h1>`;
-  emailContent += `<p>Dear ${metadata.customer_name.split(" ")[0]},</p>`;
-  emailContent += `<p>Thank you for your order of a Prompt. Here are the details you requested:</p>`;
-  emailContent += `<ul>`;
+  let emailContent = `
+  <div style="text-align: center; color: #333; font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 800px; margin: auto; background-color: #e9f3f6; padding: 40px 0;">
+    <h1 style="color: #1a2930; font-size: 2.5em; margin-bottom: 1em;">Order Confirmation</h1>
+
+    <div style="background-color: #ffffff; border-radius: 15px; padding: 30px; margin: 20px auto; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+      <p style="font-size: 1.4em; color: #4c737a;">Hello, ${metadata.customer_name.split(" ")[0]}!</p>
+      <p style="font-size: 1.3em; color: #4c737a; margin-bottom: 20px;">Thank you for your order with PromptFinder.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">`;
+
   for (let key in metadata) {
     if (metadata.hasOwnProperty(key) && key.startsWith('sample')) {
-      emailContent += `<li><strong>${key}:</strong> ${metadata[key]}</li>`;
+      emailContent += `
+        <div style="border-radius: 10px; background-color: #1a2930; padding: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.1); overflow-wrap: break-word;">
+          <h3 style="color: #d1e8ea; margin-top: 0; font-size: 1.4em;">${key}</h3>
+          <p style="color: #d1e8ea; font-size: 1.2em;">${metadata[key]}</p>
+        </div>`;
     }
   }
-  emailContent += `</ul>`;
-  emailContent += `<p>We have connected you with Gautam, who will help build & receive your Prompt within 7 days.</p>`;
-  emailContent += `<p>Best Regards,</p>`;
-  emailContent += `<p>PromptFinder team</p>`;
+
+  emailContent += `
+      </div>
+      <p style="font-size: 1.3em; color: #4c737a; margin-top: 20px;">Our representative, Gautam, will be in touch with you via this email thread. Expect your Prompt within the next 7 days.</p>
+    </div>
+
+    <p style="font-size: 1.2em; color: #4c737a;">Warm Regards,</p>
+    <p style="font-size: 1.2em; color: #4c737a;">The PromptFinder Team</p>
+  </div>`;
+
   return emailContent;
 }
-
-
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
