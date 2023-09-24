@@ -1,7 +1,7 @@
 import React from 'react';
 import SuccessComponent from '../../buycompletehelpers/SuccessComponent';
 
-export default function BuyComplete({success}) {
+export default function BuyComplete() {
   return (
     <div className='container mx-auto p-4'>
        <SuccessComponent />
